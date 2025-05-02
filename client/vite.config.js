@@ -9,15 +9,7 @@ export default defineConfig({
     open: true
   },
   build: {
-    target: 'esnext',
-    minify: 'terser',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          ui: ['@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion']
-        }
-      }
-    }
+    target: 'es2015',
+    minify: true
   }
 });
