@@ -14,7 +14,7 @@ function Signup({ setCurrentPage, handleSignup }) {
 
   return (
     <div className="signup p-8 max-w-md mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-primary-700">Sign Up</h2>
+      <h2 className="text-3xl font-bold mb-6 text-blue-700">Sign Up</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700 mb-1">First Name</label>
@@ -66,22 +66,21 @@ function Signup({ setCurrentPage, handleSignup }) {
             required 
           />
         </div>
-        <button 
-          type="submit" 
-          className="bg-primary-500 hover:bg-primary-700 text-black font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full"
-        >
-          Create Account
-        </button>
+        <div className="flex justify-center space-x-4">
+          <button 
+            onClick={() => setCurrentPage('login')} 
+            className="bg-white hover:bg-gray-100 text-blue-500 font-bold py-2 px-4 rounded-full shadow-md border border-blue-500 transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            Login
+          </button>
+          <button 
+            type="submit" 
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            Create Account
+          </button>
+        </div>
       </form>
-      <div className="mt-6 text-center">
-        <p className="text-gray-700 mb-2">Already have an account?</p>
-        <button 
-          onClick={() => setCurrentPage('login')} 
-          className="bg-white hover:bg-gray-100 text-primary-500 font-bold py-2 px-4 rounded-full shadow-md border border-primary-500 transition duration-300 ease-in-out transform hover:scale-105"
-        >
-          Login
-        </button>
-      </div>
     </div>
   );
 }
