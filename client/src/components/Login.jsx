@@ -50,22 +50,22 @@ function Login({ setCurrentPage, handleLogin }) {
             required 
           />
         </div>
-        <button 
-          type="submit" 
-          className="bg-primary-500 hover:bg-primary-700 text-black font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 w-full"
-        >
-          Login
-        </button>
+        <div className="flex flex-row space-x-4">
+          <button 
+            type="submit" 
+            className="bg-primary-500 hover:bg-primary-700 text-black font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 flex-1"
+          >
+            Login
+          </button>
+          <button 
+            type="button" 
+            onClick={() => setCurrentPage('signup')} 
+            className="bg-white hover:bg-gray-100 text-primary-500 font-bold py-3 px-6 rounded-full shadow-md border border-primary-500 transition duration-300 ease-in-out transform hover:scale-105 flex-1"
+          >
+            Sign Up
+          </button>
+        </div>
       </form>
-      <div className="mt-6 text-center">
-        <p className="text-gray-700 mb-2">Don't have an account?</p>
-        <button 
-          onClick={() => setCurrentPage('signup')} 
-          className="bg-white hover:bg-gray-100 text-primary-500 font-bold py-2 px-4 rounded-full shadow-md border border-primary-500 transition duration-300 ease-in-out transform hover:scale-105"
-        >
-          Sign Up
-        </button>
-      </div>
     </div>
   );
 }
