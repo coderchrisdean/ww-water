@@ -9,8 +9,15 @@ export default defineConfig({
     open: true
   },
   build: {
+    target: 'esnext',
+    minify: 'terser',
     rollupOptions: {
-      external: ['@chakra-ui/toast', '@chakra-ui/react']
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@chakra-ui/react', '@emotion/react', '@emotion/styled', 'framer-motion']
+        }
+      }
     }
   }
 });
