@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Button, Heading, Text, Container, VStack, Grid, GridItem, Card, CardBody, CardHeader } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Container, VStack, Grid, GridItem, Card, CardBody, CardHeader, Icon } from '@chakra-ui/react';
+import { InfoIcon, SettingsIcon, StarIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
 function Home({ setCurrentPage, isLoggedIn }) {
@@ -107,10 +108,11 @@ function Home({ setCurrentPage, isLoggedIn }) {
             <GridItem>
               <motion.div variants={fadeInUp}>
                 <Card bg="white" boxShadow="lg" borderRadius="xl" h="full" minH="300px" display="flex" flexDirection="column" transition="transform 0.3s ease-in-out" _hover={{ transform: 'translateY(-10px)', boxShadow: 'xl' }} borderTop="4px solid" borderColor="primary.500">
-                  <CardHeader p={6} pb={2}>
+                  <CardHeader p={6} pb={2} textAlign="center">
+                    <Icon as={InfoIcon} w={10} h={10} color="primary.500" mb={3} />
                     <Heading as="h3" size="lg" mb={3} color="primary.700" fontWeight="bold" fontFamily="heading">About Us</Heading>
                   </CardHeader>
-                  <CardBody p={6} flex="1" display="flex" alignItems="flex-start">
+                  <CardBody p={6} flex="1" display="flex" alignItems="center" justifyContent="center" textAlign="center">
                     <Text color="gray.700" fontSize="md">Wet N Wild Water Toys LLC is dedicated to providing the best jet ski rental experience in Los Angeles. Our team ensures safety and fun on the water!</Text>
                   </CardBody>
                 </Card>
@@ -119,10 +121,11 @@ function Home({ setCurrentPage, isLoggedIn }) {
             <GridItem>
               <motion.div variants={fadeInUp}>
                 <Card bg="white" boxShadow="lg" borderRadius="xl" h="full" minH="300px" display="flex" flexDirection="column" transition="transform 0.3s ease-in-out" _hover={{ transform: 'translateY(-10px)', boxShadow: 'xl' }} borderTop="4px solid" borderColor="primary.500">
-                  <CardHeader p={6} pb={2}>
+                  <CardHeader p={6} pb={2} textAlign="center">
+                    <Icon as={SettingsIcon} w={10} h={10} color="primary.500" mb={3} />
                     <Heading as="h3" size="lg" mb={3} color="primary.700" fontWeight="bold" fontFamily="heading">Our Services</Heading>
                   </CardHeader>
-                  <CardBody p={6} flex="1" display="flex" alignItems="flex-start">
+                  <CardBody p={6} flex="1" display="flex" alignItems="center" justifyContent="center" textAlign="center">
                     <Text color="gray.700" fontSize="md">We offer hourly and daily jet ski rentals, guided tours, and safety training. Book online today for a thrilling water adventure!</Text>
                   </CardBody>
                 </Card>
@@ -131,10 +134,11 @@ function Home({ setCurrentPage, isLoggedIn }) {
             <GridItem>
               <motion.div variants={fadeInUp}>
                 <Card bg="white" boxShadow="lg" borderRadius="xl" h="full" minH="300px" display="flex" flexDirection="column" transition="transform 0.3s ease-in-out" _hover={{ transform: 'translateY(-10px)', boxShadow: 'xl' }} borderTop="4px solid" borderColor="primary.500">
-                  <CardHeader p={6} pb={2}>
+                  <CardHeader p={6} pb={2} textAlign="center">
+                    <Icon as={StarIcon} w={10} h={10} color="primary.500" mb={3} />
                     <Heading as="h3" size="lg" mb={3} color="primary.700" fontWeight="bold" fontFamily="heading">Why Choose Us?</Heading>
                   </CardHeader>
-                  <CardBody p={6} flex="1" display="flex" alignItems="flex-start">
+                  <CardBody p={6} flex="1" display="flex" alignItems="center" justifyContent="center" textAlign="center">
                     <Text color="gray.700" fontSize="md">Choose Wet N Wild for unparalleled customer service, well-maintained equipment, and a passion for water sports. Your safety and enjoyment are our priorities!</Text>
                   </CardBody>
                 </Card>
