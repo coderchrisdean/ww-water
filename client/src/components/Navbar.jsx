@@ -1,112 +1,110 @@
 import React, { useState } from 'react';
-import { Box, Flex, Heading, Button, HStack, useBreakpointValue, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure } from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
-function Navbar({ currentPage, setCurrentPage, isLoggedIn, handleLogout }) {
-  const { isOpen, onToggle, onClose } = useDisclosure();
-  const isMobile = useBreakpointValue({ base: true, md: false });
+function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
+  const { isOpen, onToggle } = useDisclosure();
 
-  const handleNavClick = (page) => {
-    setCurrentPage(page);
-    onClose(); // Close menu on navigation
-  };
-
-  // Animation variants for menu fade-in
-  const fadeIn = {
-    hidden: { opacity: 0, y: -10 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } }
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentPage('home');
   };
 
   return (
-    <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      style={{ position: 'sticky', top: 0, zIndex: 50 }}
-    >
-      <Box bg="primary.700" color="white" p={4} shadow="md">
-        <Flex container mx="auto" alignItems="center" justifyContent="space-between" maxW="container.xl">
-          <Heading
-            size="lg"
+    <Box>
+      <Flex
+        bg="primary.700"
+        color="white"
+        minH="60px"
+        py={{ base: 2 }}
+        px={{ base: 4, md: 10 }}
+        borderBottom={1}
+        borderStyle="solid"
+        borderColor="primary.800"
+        align="center"
+        justify="space-between"
+        as={motion.div}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        position="sticky"
+        top="0"
+        zIndex="50"
+        boxShadow="md"
+      >
+        <Flex align="center">
+          <Text
+            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+            fontFamily="heading"
+            fontSize={{ base: 'xl', md: '2xl' }}
             fontWeight="bold"
+            onClick={() => setCurrentPage('home')}
             cursor="pointer"
-            _hover={{ color: 'primary.300' }}
-            transition="color 0.2s ease-in-out"
-            onClick={() => handleNavClick('home')}
           >
             Wet N Wild Water Toys
-          </Heading>
-
-          {/* Hamburger Icon for Mobile */}
-          {isMobile && (
-            <Button
-              aria-label="Toggle navigation menu"
-              onClick={onToggle}
-              bg="transparent"
-              color="white"
-              _hover={{ bg: 'primary.600' }}
-              size="md"
-              p={0}
-            >
-              {isOpen ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              )}
-            </Button>
-          )}
-
-          {/* Navigation Links - Desktop */}
-          {!isMobile && (
-            <HStack spacing={6} alignItems="center">
-              <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('home')} fontWeight={currentPage === 'home' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Home</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('about')} fontWeight={currentPage === 'about' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>About</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('services')} fontWeight={currentPage === 'services' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Services</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('faq')} fontWeight={currentPage === 'faq' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>FAQ</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('contact')} fontWeight={currentPage === 'contact' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Contact</Button>
-              {isLoggedIn ? (
-                <>
-                  <Button variant="ghost" colorScheme="whiteAlpha" onClick={() => handleNavClick('dashboard')} fontWeight={currentPage === 'dashboard' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Dashboard</Button>
-                  <Button onClick={handleLogout} bg="white" color="primary.700" px={4} py={2} rounded="lg" _hover={{ bg: 'gray.100' }}>Logout</Button>
-                </>
-              ) : (
-                <Button onClick={() => handleNavClick('login')} bg="white" color="primary.700" px={4} py={2} rounded="lg" _hover={{ bg: 'gray.100' }}>Login</Button>
-              )}
-            </HStack>
-          )}
+          </Text>
         </Flex>
 
-        {/* Mobile Menu */}
-        {isMobile && isOpen && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeIn}
-            style={{ backgroundColor: 'rgba(229, 62, 62, 0.95)', padding: '1rem', marginTop: '1rem', borderRadius: '0.5rem', width: '100%', maxHeight: '50vh', overflowY: 'auto' }}
-          >
-            <Flex direction="column" alignItems="center" gap={3}>
-              <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('home')} fontWeight={currentPage === 'home' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Home</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('about')} fontWeight={currentPage === 'about' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>About</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('services')} fontWeight={currentPage === 'services' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Services</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('faq')} fontWeight={currentPage === 'faq' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>FAQ</Button>
-              <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('contact')} fontWeight={currentPage === 'contact' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Contact</Button>
-              {isLoggedIn ? (
-                <>
-                  <Button variant="ghost" colorScheme="whiteAlpha" w="full" onClick={() => handleNavClick('dashboard')} fontWeight={currentPage === 'dashboard' ? 'bold' : 'normal'} _hover={{ color: 'primary.300' }}>Dashboard</Button>
-                  <Button onClick={handleLogout} bg="white" color="primary.700" w="full" py={2} rounded="lg" _hover={{ bg: 'gray.100' }}>Logout</Button>
-                </>
-              ) : (
-                <Button onClick={() => handleNavClick('login')} bg="white" color="primary.700" w="full" py={2} rounded="lg" _hover={{ bg: 'gray.100' }}>Login</Button>
-              )}
-            </Flex>
-          </motion.div>
-        )}
-      </Box>
-    </motion.nav>
+        <Flex display={{ base: 'flex', md: 'none' }}>
+          <IconButton
+            onClick={onToggle}
+            icon={isOpen ? <CloseIcon w={5} h={5} color="white" /> : <HamburgerIcon w={6} h={6} color="white" />}
+            variant="ghost"
+            aria-label="Toggle Navigation"
+            _hover={{ bg: 'primary.600' }}
+            _active={{ bg: 'primary.800' }}
+          />
+        </Flex>
+
+        <Stack direction="row" spacing={4} display={{ base: 'none', md: 'flex' }} align="center">
+          <Button onClick={() => setCurrentPage('home')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Home</Button>
+          <Button onClick={() => setCurrentPage('about')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">About</Button>
+          <Button onClick={() => setCurrentPage('services')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Services</Button>
+          <Button onClick={() => setCurrentPage('faq')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">FAQ</Button>
+          <Button onClick={() => setCurrentPage('contact')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Contact</Button>
+          {isLoggedIn ? (
+            <>
+              <Button onClick={() => setCurrentPage('dashboard')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Dashboard</Button>
+              <Button onClick={handleLogout} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Logout</Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={() => setCurrentPage('login')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Login</Button>
+              <Button onClick={() => setCurrentPage('signup')} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" fontSize="md">Sign Up</Button>
+            </>
+          )}
+        </Stack>
+      </Flex>
+
+      <Collapse in={isOpen} animateOpacity>
+        <Stack
+          bg="primary.700"
+          p={4}
+          display={{ md: 'none' }}
+          borderBottom={1}
+          borderStyle="solid"
+          borderColor="primary.800"
+        >
+          <Button onClick={() => { setCurrentPage('home'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Home</Button>
+          <Button onClick={() => { setCurrentPage('about'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">About</Button>
+          <Button onClick={() => { setCurrentPage('services'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Services</Button>
+          <Button onClick={() => { setCurrentPage('faq'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">FAQ</Button>
+          <Button onClick={() => { setCurrentPage('contact'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Contact</Button>
+          {isLoggedIn ? (
+            <>
+              <Button onClick={() => { setCurrentPage('dashboard'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Dashboard</Button>
+              <Button onClick={() => { handleLogout(); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Logout</Button>
+            </>
+          ) : (
+            <>
+              <Button onClick={() => { setCurrentPage('login'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Login</Button>
+              <Button onClick={() => { setCurrentPage('signup'); onToggle(); }} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" justifyContent="flex-start">Sign Up</Button>
+            </>
+          )}
+        </Stack>
+      </Collapse>
+    </Box>
   );
 }
 

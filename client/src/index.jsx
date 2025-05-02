@@ -4,29 +4,38 @@ import App from './App';
 import './index.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
-// Define custom theme with red color scheme
+// Define custom theme with water-inspired colors
 const theme = extendTheme({
   colors: {
     primary: {
-      50: '#ffe6e6',
-      100: '#ffb3b3',
-      200: '#ff8080',
-      300: '#ff4d4d',
-      400: '#ff1a1a',
-      500: '#e60000',
-      600: '#b30000',
-      700: '#800000', // Main red color used
-      800: '#4d0000',
-      900: '#1a0000',
+      50: '#E6F1F7',
+      100: '#CCE3EF',
+      200: '#99C7DF',
+      300: '#66AACF',
+      400: '#338EBF',
+      500: '#0072A0',
+      600: '#005B80',
+      700: '#004460',
+      800: '#002D40',
+      900: '#001720'
     },
+    secondary: {
+      500: '#00A0B0',
+      600: '#00808C'
+    }
+  },
+  fonts: {
+    heading: "'Montserrat', sans-serif",
+    body: "'Roboto', sans-serif"
   },
   components: {
     Button: {
       baseStyle: {
         fontWeight: 'bold',
-      },
-    },
-  },
+        borderRadius: 'md'
+      }
+    }
+  }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
