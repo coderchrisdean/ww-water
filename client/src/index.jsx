@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 // Define custom theme with water-inspired colors
-const theme = extendTheme({
+const chakraTheme = extendTheme({
   colors: {
     primary: {
       50: '#E6F1F7',
@@ -41,8 +43,10 @@ const theme = extendTheme({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <ThemeProvider theme={theme}>
+      <ChakraProvider theme={chakraTheme}>
+        <App />
+      </ChakraProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

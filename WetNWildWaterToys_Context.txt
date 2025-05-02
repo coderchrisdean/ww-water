@@ -1,0 +1,54 @@
+Wet N Wild Water Toys Web Application Context
+=============================================
+
+Project Overview:
+- Name: Wet N Wild Water Toys
+- Purpose: A web application for jet ski rentals in Los Angeles, providing a user-friendly platform for booking and managing rentals.
+- Repository: https://github.com/coderchrisdean/ww-water
+- Local Path: c:/Users/dchri/Desktop/app-projects/ww-water
+
+Frontend Details:
+- Framework: React with Vite
+- Styling: Chakra UI for consistent UI components and layout
+- Theme: Water-inspired color scheme (teals and blues)
+  - Primary Color: primary.700 (#0072A0)
+  - Secondary Color: secondary.500 (#00A0B0)
+- Fonts: Montserrat for headings, Roboto for body text
+- Key Components:
+  - Navbar: Responsive navigation with hamburger menu for mobile, includes Home, About, Services, FAQ, Contact, Login/Signup or Dashboard/Logout based on login status
+  - Home: Hero section with call-to-action, welcome section, feature cards (About Us, Our Services, Why Choose Us?) with icons, and a final CTA section
+  - Login/SignUp: Forms for user authentication, styled with water theme, buttons aligned on the same line
+- Frontend Server Command: `npm run dev` from the `client` directory
+- Frontend URL: http://localhost:3003 (when running locally)
+
+Backend Plans (Not Yet Implemented):
+- Framework: Express.js (Node.js)
+- Database: PostgreSQL for storing user data and rental bookings
+- Authentication: JWT for secure user sessions, bcrypt for password hashing
+- API Endpoints: Planned for user registration (/api/register) and login (/api/login)
+
+Design Inspirations and Goals:
+- Inspired by https://codiga.io/ for a modern, clean layout
+- Focus on responsiveness for mobile and desktop users
+- Animations using Framer Motion for engaging user experience
+- Accessibility and usability prioritized in design choices
+
+Recent Updates:
+- UI redesign completed with Chakra UI, removing Tailwind CSS
+- Fixed hamburger menu and navigation links
+- Updated color schemes across components for consistency
+- Removed unnecessary footer and demo credential texts
+- Added icons to feature cards on the home page
+
+Current Status:
+- Frontend development completed for core components
+- Awaiting branch switch before proceeding with backend integration and database setup
+
+Key Files:
+- Client Config: client/package.json, client/vite.config.js
+- Main App: client/src/App.jsx, client/src/index.jsx
+- Components: client/src/components/ (Navbar.jsx, Home.jsx, Login.jsx, SignUp.jsx, etc.)
+
+For Further Assistance:
+- Copy and paste this information into another chat or tool for context on the Wet N Wild Water Toys project.
+- Contact: [Your contact information if needed]

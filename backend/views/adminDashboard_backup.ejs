@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Wet N Wild Water Toys</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0072A0;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+    }
+    nav {
+      background-color: #00A0B0;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    .container {
+      padding: 20px;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #e0e0e0;
+    }
+    button {
+      background-color: #0072A0;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #005f80;
+    }
+    .secondary-button {
+      background-color: #00A0B0;
+    }
+    .secondary-button:hover {
+      background-color: #008090;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Wet N Wild Water Toys - Admin Dashboard</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#users" onclick="showTab('users')">Users</a></li>
+      <li><a href="#bookings" onclick="showTab('bookings')">Bookings</a></li>
+      <li><a href="#inventory" onclick="showTab('inventory')">Inventory</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div id="users" class="tab-content active">
+      <h2>Users</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.role %></td>
+              <td>
+                <button onclick="alert('Edit functionality not implemented yet')">Edit</button>
+                <button class="secondary-button" onclick="alert('Delete functionality not implemented yet')">Delete</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <button onclick="alert('Add user functionality not implemented yet')">Add User</button>
+    </div>
+    <div id="bookings" class="tab-content">
+      <h2>Bookings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Jet Ski</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% bookings.forEach(booking => { %>
+            <tr>
+              <td><%= booking.user %></td>
+              <td><%= booking.jetSki %></td>
+              <td><%= booking.date %></td>
+              <td><%= booking.status %></td>
+              <td>
+                <button onclick="alert('Update status functionality not implemented yet')">Update Status</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <div id="inventory" class="tab-content">
+      <h2>Inventory</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Status</th>
+            <th>Availability</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% inventory.forEach(item => { %>
+            <tr>
+              <td><%= item.model %></td>
+              <td><%= item.status %></td>
+              <td><%= item.availability %></td>
+              <td>
+                <button onclick="alert('Edit functionality not implemented yet')">Edit</button>
+                <button class="secondary-button" onclick="alert('Delete functionality not implemented yet')">Delete</button>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <button onclick="alert('Add jet ski functionality not implemented yet')">Add Jet Ski</button>
+    </div>
+  </div>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+      document.querySelectorAll('nav ul li a').forEach(link => {
+        link.style.fontWeight = 'normal';
+      });
+      document.querySelector(`nav ul li a[href='#${tabId}']`).style.fontWeight = 'bold';
+    }
+    // Set the first tab as active by default
+    document.getElementById('users').classList.add('active');
+    document.querySelector(`nav ul li a[href='#users']`).style.fontWeight = 'bold';
+  </script>
+</body>
+</html>

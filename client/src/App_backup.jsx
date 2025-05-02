@@ -7,10 +7,6 @@ import Dashboard from './components/Dashboard';
 import Admin from './components/Admin';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import UserDashboard from './components/dashboards/UserDashboard';
-import About from './components/About';
-import Services from './components/Services';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -89,10 +85,6 @@ function App() {
             <Route path="/signup" element={<Signup setCurrentPage={setCurrentPageWithLog} handleSignup={handleSignup} />} />
             <Route path="/dashboard/user" element={<UserDashboard />} />
             <Route path="/dashboard/admin" element={<Navigate to="http://localhost:3004/dashboard/admin" replace />} />
-            <Route path="/about" element={<About setCurrentPage={setCurrentPageWithLog} />} />
-            <Route path="/services" element={<Services setCurrentPage={setCurrentPageWithLog} />} />
-            <Route path="/faq" element={<FAQ setCurrentPage={setCurrentPageWithLog} />} />
-            <Route path="/contact" element={<Contact setCurrentPage={setCurrentPageWithLog} />} />
           </Routes>
         </main>
         <footer className="bg-gray-800 text-white py-6">

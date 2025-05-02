@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
-function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
+function Navbar({ setCurrentPage, isLoggedIn, handleLogout }) {
   const { isOpen, onToggle } = useDisclosure();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setCurrentPage('home');
+  const handleNavigation = (page) => {
+    navigate(page);
+    setCurrentPage(page);
   };
 
   return (
@@ -39,7 +41,7 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
             fontFamily="heading"
             fontSize={{ base: 'xl', md: '2xl' }}
             fontWeight="bold"
-            onClick={() => setCurrentPage('home')}
+            onClick={() => handleNavigation('/')}
             cursor="pointer"
           >
             Wet N Wild Water Toys
@@ -49,32 +51,56 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
         <Flex display={{ base: 'flex', md: 'none' }}>
           <IconButton
             onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={5} h={5} color="white" /> : <HamburgerIcon w={6} h={6} color="white" />}
+            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
             variant="ghost"
             aria-label="Toggle Navigation"
-            _hover={{ bg: 'primary.600' }}
-            _active={{ bg: 'primary.800' }}
+            color="white"
           />
         </Flex>
 
-        <Stack direction="row" spacing={4} display={{ base: 'none', md: 'flex' }} align="center">
-          <Button onClick={() => setCurrentPage('home')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Home</Button>
-          <Button onClick={() => setCurrentPage('about')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">About</Button>
-          <Button onClick={() => setCurrentPage('services')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Services</Button>
-          <Button onClick={() => setCurrentPage('faq')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">FAQ</Button>
-          <Button onClick={() => setCurrentPage('contact')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Contact</Button>
-          {isLoggedIn ? (
-            <>
-              <Button onClick={() => setCurrentPage('dashboard')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Dashboard</Button>
-              <Button onClick={handleLogout} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Logout</Button>
-            </>
-          ) : (
-            <>
-              <Button onClick={() => setCurrentPage('login')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Login</Button>
-              <Button onClick={() => setCurrentPage('signup')} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" fontSize="md">Sign Up</Button>
-            </>
-          )}
-        </Stack>
+        <Flex display={{ base: 'none', md: 'flex' }} align="center">
+          <Stack direction="row" spacing={7} align="center">
+            <Text onClick={() => handleNavigation('/')} cursor="pointer">Home</Text>
+            <Text onClick={() => handleNavigation('/about')} cursor="pointer">About</Text>
+            <Text onClick={() => handleNavigation('/services')} cursor="pointer">Services</Text>
+            <Text onClick={() => handleNavigation('/faq')} cursor="pointer">FAQ</Text>
+            <Text onClick={() => handleNavigation('/contact')} cursor="pointer">Contact</Text>
+            {isLoggedIn ? (
+              <>
+                <Text onClick={() => handleNavigation('/dashboard')} cursor="pointer">Dashboard</Text>
+                <Button
+                  as={Button}
+                  variant="link"
+                  color="white"
+                  onClick={() => {
+                    handleLogout();
+                    handleNavigation('/');
+                  }}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Text onClick={() => handleNavigation('/login')} cursor="pointer">Login</Text>
+                <Button
+                  as={Button}
+                  display={{ base: 'none', md: 'inline-flex' }}
+                  fontSize="sm"
+                  fontWeight={600}
+                  color="primary.700"
+                  bg="white"
+                  onClick={() => handleNavigation('/signup')}
+                  _hover={{
+                    bg: 'gray.100',
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
+          </Stack>
+        </Flex>
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
@@ -82,26 +108,35 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
           bg="primary.700"
           p={4}
           display={{ md: 'none' }}
-          borderBottom={1}
-          borderStyle="solid"
-          borderColor="primary.800"
+          color="white"
         >
-          <Button onClick={() => { setCurrentPage('home'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Home</Button>
-          <Button onClick={() => { setCurrentPage('about'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">About</Button>
-          <Button onClick={() => { setCurrentPage('services'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Services</Button>
-          <Button onClick={() => { setCurrentPage('faq'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">FAQ</Button>
-          <Button onClick={() => { setCurrentPage('contact'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Contact</Button>
-          {isLoggedIn ? (
-            <>
-              <Button onClick={() => { setCurrentPage('dashboard'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Dashboard</Button>
-              <Button onClick={() => { handleLogout(); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Logout</Button>
-            </>
-          ) : (
-            <>
-              <Button onClick={() => { setCurrentPage('login'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Login</Button>
-              <Button onClick={() => { setCurrentPage('signup'); onToggle(); }} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" justifyContent="flex-start">Sign Up</Button>
-            </>
-          )}
+          <Stack>
+            <Text onClick={() => { handleNavigation('/'); onToggle(); }} cursor="pointer">Home</Text>
+            <Text onClick={() => { handleNavigation('/about'); onToggle(); }} cursor="pointer">About</Text>
+            <Text onClick={() => { handleNavigation('/services'); onToggle(); }} cursor="pointer">Services</Text>
+            <Text onClick={() => { handleNavigation('/faq'); onToggle(); }} cursor="pointer">FAQ</Text>
+            <Text onClick={() => { handleNavigation('/contact'); onToggle(); }} cursor="pointer">Contact</Text>
+            {isLoggedIn ? (
+              <>
+                <Text onClick={() => { handleNavigation('/dashboard'); onToggle(); }} cursor="pointer">Dashboard</Text>
+                <Text
+                  onClick={() => {
+                    handleLogout();
+                    handleNavigation('/');
+                    onToggle();
+                  }}
+                  cursor="pointer"
+                >
+                  Logout
+                </Text>
+              </>
+            ) : (
+              <>
+                <Text onClick={() => { handleNavigation('/login'); onToggle(); }} cursor="pointer">Login</Text>
+                <Text onClick={() => { handleNavigation('/signup'); onToggle(); }} cursor="pointer">Sign Up</Text>
+              </>
+            )}
+          </Stack>
         </Stack>
       </Collapse>
     </Box>
