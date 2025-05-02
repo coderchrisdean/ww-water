@@ -1,3 +1,14 @@
+import React from 'react';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Services from './components/Services';
+import FAQ from './components/FAQ';
+import Contact from './components/Contact';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Admin from './components/Admin';
+
 function App() {
   const [currentPage, setCurrentPage] = React.useState('home');
   const [isLoggedIn, setIsLoggedIn] = React.useState(!!localStorage.getItem('token'));
@@ -86,4 +97,4 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;
