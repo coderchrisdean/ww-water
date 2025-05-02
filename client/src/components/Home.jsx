@@ -6,7 +6,7 @@ function Home({ setCurrentPage, isLoggedIn }) {
       {/* Hero Section */}
       <section className="relative h-96 bg-gray-300 flex items-center justify-center overflow-hidden mb-8">
         {/* Placeholder for background image */}
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://via.placeholder.com/1200x400?text=Jet+Ski+Adventure')" }}></div>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521651201144-634f700b36f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80')" }}></div>
         <div className="absolute inset-0 bg-black bg-opacity-50"></div>
         <div className="relative z-10 text-white p-6 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Experience the Thrill of Jet Skiing</h2>
