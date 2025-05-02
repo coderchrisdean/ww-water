@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Container, useToast } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Container } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/toast';
 import { motion } from 'framer-motion';
 
 function Login({ setCurrentPage, handleLogin }) {

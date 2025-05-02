@@ -53,7 +53,7 @@ function Navbar({ currentPage, setCurrentPage, isLoggedIn, handleLogout }) {
 
       {/* Navigation Links - Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden mt-4 space-y-2 px-2 py-3 bg-primary-600 rounded-lg shadow-lg absolute right-4 w-48 z-50">
+        <div className="md:hidden mt-4 space-y-2 px-2 py-3 bg-primary-700 opacity-100 rounded-lg shadow-lg absolute right-4 w-48 z-50">
           <button onClick={() => handleNavClick('home')} className={`block w-full text-left px-4 py-2 hover:bg-primary-500 rounded transition-colors duration-200 ${currentPage === 'home' ? 'font-bold' : ''}`}>Home</button>
           <button onClick={() => handleNavClick('about')} className={`block w-full text-left px-4 py-2 hover:bg-primary-500 rounded transition-colors duration-200 ${currentPage === 'about' ? 'font-bold' : ''}`}>About</button>
           <button onClick={() => handleNavClick('services')} className={`block w-full text-left px-4 py-2 hover:bg-primary-500 rounded transition-colors duration-200 ${currentPage === 'services' ? 'font-bold' : ''}`}>Services</button>
