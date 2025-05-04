@@ -1,0 +1,44 @@
+# Wet N Wild Water Toys — Product Requirements Document (PRD)
+
+## Overview
+Wet N Wild Water Toys is a modern, water-themed e-commerce and booking platform for water toys rentals and sales, targeting families and water sports enthusiasts. The platform should be visually inspired by https://codiga.io/ with a clean, professional, and animated UI, leveraging teals and blues, with Montserrat for headings and Roboto for body text.
+
+## Core Features
+- User authentication (Sign up, Login, Forgot password)
+- User dashboard: Profile management, booking history, upcoming bookings
+- Admin dashboard: Manage users, bookings, inventory
+- Product catalog: Browse, search, and filter water toys
+- Booking system: Select dates, check availability, reserve toys
+- Shopping cart and checkout for purchases
+- Payment integration (Stripe or similar)
+- Responsive design, mobile-friendly
+- Animations and micro-interactions for a modern feel
+
+## Technical Requirements
+- React frontend (with Material-UI, custom theme)
+- Node.js/Express backend (API)
+- PostgreSQL for data storage
+- Secure API endpoints
+- .env for secrets/config
+
+## UI/UX Requirements
+- Water-inspired color palette (teals, blues)
+- Modern layout, responsive for all devices
+- Montserrat for headings, Roboto for body
+- Clean, professional look with subtle animations
+- Hamburger menu with white icon on navbar
+
+## Stretch Goals
+- Reviews and ratings
+- Push notifications
+- Loyalty program
+- Multi-language support
+
+## Success Metrics
+- User signups
+- Completed bookings
+- Sales volume
+- User satisfaction (feedback, ratings)
+
+---
+This PRD serves as the foundation for all design, development, and QA efforts for Wet N Wild Water Toys.

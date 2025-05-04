@@ -1,0 +1,31 @@
+# Task ID: 3
+# Title: Product Catalog and Database Schema
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: Design and implement the product catalog database schema and API endpoints for water toys with search, filter, and browse functionality.
+# Details:
+1. Create Product model in MongoDB with fields:
+   - name, description, price, images, category, availability, rentalPrice, purchasePrice, specifications
+2. Implement backend routes and controllers for products:
+   - GET /api/products (with query params for filtering)
+   - GET /api/products/:id
+   - POST /api/products (admin only)
+   - PUT /api/products/:id (admin only)
+   - DELETE /api/products/:id (admin only)
+3. Implement search functionality with MongoDB queries
+4. Create filtering logic based on product attributes
+5. Design and implement product categories
+6. Create frontend components for product display:
+   - Product card component
+   - Product details page
+   - Product grid/list views
+7. Implement frontend search and filter UI components
+
+# Test Strategy:
+1. Unit tests for product controllers
+2. Test product CRUD operations
+3. Verify search functionality with various queries
+4. Test filtering with different parameters
+5. Verify product details display correctly
+6. Test admin-only operations with different user roles

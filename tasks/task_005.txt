@@ -1,0 +1,35 @@
+# Task ID: 5
+# Title: Shopping Cart and Checkout
+# Status: pending
+# Dependencies: 3
+# Priority: medium
+# Description: Implement shopping cart functionality for purchasing water toys with add/remove items, quantity adjustment, and checkout process.
+# Details:
+1. Create Cart model in MongoDB (or use client-side storage):
+   - userId, items (array of productId, quantity, price), totalPrice
+2. Implement backend routes for cart (if server-side):
+   - GET /api/cart
+   - POST /api/cart/add
+   - PUT /api/cart/update
+   - DELETE /api/cart/remove
+3. Create frontend cart components:
+   - Cart icon with item count
+   - Cart dropdown/sidebar
+   - Cart page with item list
+   - Quantity adjusters
+4. Implement cart context/provider for state management
+5. Create checkout flow:
+   - Shipping information form
+   - Order summary
+   - Payment method selection
+6. Implement order creation upon successful checkout
+7. Handle cart session persistence
+
+# Test Strategy:
+1. Test adding/removing items from cart
+2. Verify quantity adjustment functionality
+3. Test cart total calculation
+4. Verify cart persistence across sessions
+5. Test checkout flow with valid/invalid inputs
+6. Verify order creation after checkout
+7. Test cart clearing after successful order

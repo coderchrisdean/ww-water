@@ -1,0 +1,30 @@
+# Task ID: 6
+# Title: Payment Integration
+# Status: pending
+# Dependencies: 4, 5
+# Priority: high
+# Description: Integrate Stripe or similar payment gateway for processing purchases and bookings with secure checkout.
+# Details:
+1. Set up Stripe account and obtain API keys
+2. Install Stripe libraries for frontend and backend
+3. Implement backend payment routes and controllers:
+   - POST /api/payments/create-payment-intent
+   - POST /api/payments/confirm-payment
+4. Create frontend payment components:
+   - Credit card input form
+   - Payment processing UI
+   - Success/failure screens
+5. Implement secure handling of payment information
+6. Create webhook handlers for payment events
+7. Implement payment status tracking
+8. Handle payment failures and retries
+9. Create receipts/invoices for successful payments
+
+# Test Strategy:
+1. Test payment processing with Stripe test cards
+2. Verify payment intent creation
+3. Test successful and failed payment scenarios
+4. Verify webhook handling
+5. Test payment status updates
+6. Verify receipt generation
+7. Test payment security measures

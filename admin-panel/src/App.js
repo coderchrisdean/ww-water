@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import AdminDashboard from './components/AdminDashboard';
+import UserDashboard from './components/UserDashboard';
+import Login from './Login';
+import ClerkSignUp from './SignUp';
+import Profile from './Profile';
+import { SignedIn, SignedOut, RedirectToSignIn, useUser } from '@clerk/clerk-react';
 
 const theme = createTheme({
   palette: {
@@ -23,10 +29,39 @@ const theme = createTheme({
 });
 
 function App() {
+  const { user, isLoaded } = useUser();
+
+  if (!isLoaded) return null;
+
+  // You can use Clerk's publicMetadata or email to distinguish admin
+  const isAdmin = user && (user.publicMetadata?.role === 'admin' || user.emailAddresses[0]?.emailAddress === 'admin@wetnwild.com');
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AdminDashboard />
+      <Router>
+        <Routes>
+          <Route path="/sign-in" element={<Login />} />
+          <Route path="/sign-up" element={<ClerkSignUp />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/"
+            element={
+              <SignedIn>
+                {isAdmin ? <AdminDashboard /> : <UserDashboard />}
+              </SignedIn>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <SignedOut>
+                <Navigate to="/sign-in" replace />
+              </SignedOut>
+            }
+          />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

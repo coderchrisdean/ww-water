@@ -1,0 +1,29 @@
+# Task ID: 7
+# Title: User Dashboard Implementation
+# Status: pending
+# Dependencies: 2, 4
+# Priority: medium
+# Description: Create user dashboard with profile management, booking history, and upcoming bookings display.
+# Details:
+1. Design user dashboard layout
+2. Implement frontend dashboard components:
+   - Profile information display and edit form
+   - Booking history list with filters
+   - Upcoming bookings with countdown
+   - Account settings
+3. Create backend routes for user profile:
+   - GET /api/users/profile
+   - PUT /api/users/profile
+   - GET /api/users/bookings
+4. Implement profile image upload functionality
+5. Create booking cancellation feature
+6. Implement booking details view
+7. Add notification settings management
+
+# Test Strategy:
+1. Test profile information display and updates
+2. Verify booking history display with different filters
+3. Test upcoming bookings display and countdown
+4. Verify profile image upload
+5. Test booking cancellation from dashboard
+6. Verify responsive layout on different devices

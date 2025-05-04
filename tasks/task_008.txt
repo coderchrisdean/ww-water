@@ -1,0 +1,31 @@
+# Task ID: 8
+# Title: Admin Dashboard
+# Status: pending
+# Dependencies: 2, 3, 4
+# Priority: medium
+# Description: Develop admin dashboard for managing users, bookings, and inventory with CRUD operations and analytics.
+# Details:
+1. Design admin dashboard layout
+2. Implement role-based access control
+3. Create admin-only routes and middleware
+4. Implement frontend admin components:
+   - User management table
+   - Booking management table
+   - Inventory management
+   - Analytics dashboard
+5. Create backend admin routes:
+   - GET /api/admin/users
+   - GET /api/admin/bookings
+   - GET /api/admin/products
+   - GET /api/admin/analytics
+6. Implement CRUD operations for all resources
+7. Create filtering and sorting functionality
+8. Implement basic analytics and reporting
+
+# Test Strategy:
+1. Test admin authentication and authorization
+2. Verify user management CRUD operations
+3. Test booking management features
+4. Verify inventory management functionality
+5. Test analytics data accuracy
+6. Verify non-admin users cannot access admin features
