@@ -1,0 +1,113 @@
+// =================== CRUD ENDPOINTS FOR BOOKINGS ===================
+const express = require('express');
+const { Pool } = require('pg');
+const router = express.Router();
+const pool = new Pool();
+
+// Get all bookings
+router.get('/', async (req, res) => {
+  const result = await pool.query('SELECT * FROM bookings');
+  res.json(result.rows);
+});
+
+// Get booking by id
+router.get('/:id', async (req, res) => {
+  const result = await pool.query('SELECT * FROM bookings WHERE id = $1', [req.params.id]);
+  res.json(result.rows[0]);
+});
+
+// Create booking
+router.post('/', async (req, res) => {
+  const { user_id, inventory_id, booking_date, status } = req.body;
+  const result = await pool.query(
+    'INSERT INTO bookings (user_id, inventory_id, booking_date, status) VALUES ($1, $2, $3, $4) RETURNING *',
+    [user_id, inventory_id, booking_date, status || 'pending']
+  );
+  res.status(201).json(result.rows[0]);
+});
+
+// Update booking
+router.put('/:id', async (req, res) => {
+  const { user_id, inventory_id, booking_date, status } = req.body;
+  const result = await pool.query(
+    'UPDATE bookings SET user_id=$1, inventory_id=$2, booking_date=$3, status=$4 WHERE id=$5 RETURNING *',
+    [user_id, inventory_id, booking_date, status, req.params.id]
+  );
+  res.json(result.rows[0]);
+});
+
+// Delete booking
+router.delete('/:id', async (req, res) => {
+  await pool.query('DELETE FROM bookings WHERE id = $1', [req.params.id]);
+  res.json({ success: true });
+});
+
+module.exports = router;
+
+// =================== CRUD ENDPOINTS FOR INVENTORY ===================
+const express = require('express');
+const { Pool } = require('pg');
+const router = express.Router();
+const pool = new Pool();
+
+// Get all inventory
+router.get('/', async (req, res) => {
+  const result = await pool.query('SELECT * FROM inventory');
+  res.json(result.rows);
+});
+
+// Get inventory by id
+router.get('/:id', async (req, res) => {
+  const result = await pool.query('SELECT * FROM inventory WHERE id = $1', [req.params.id]);
+  res.json(result.rows[0]);
+});
+
+// Create inventory item
+router.post('/', async (req, res) => {
+  const { name, type, status } = req.body;
+  const result = await pool.query(
+    'INSERT INTO inventory (name, type, status) VALUES ($1, $2, $3) RETURNING *',
+    [name, type, status || 'available']
+  );
+  res.status(201).json(result.rows[0]);
+});
+
+// Update inventory item
+router.put('/:id', async (req, res) => {
+  const { name, type, status } = req.body;
+  const result = await pool.query(
+    'UPDATE inventory SET name=$1, type=$2, status=$3 WHERE id=$4 RETURNING *',
+    [name, type, status, req.params.id]
+  );
+  res.json(result.rows[0]);
+});
+
+// Delete inventory item
+router.delete('/:id', async (req, res) => {
+  await pool.query('DELETE FROM inventory WHERE id = $1', [req.params.id]);
+  res.json({ success: true });
+});
+
+module.exports = router;
+
+// =================== AUTHENTICATION MIDDLEWARE ===================
+const jwt = require('jsonwebtoken');
+
+function authenticateJWT(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err) return res.sendStatus(403);
+      req.user = user;
+      next();
+    });
+  } else {
+    res.sendStatus(401);
+  }
+}
+
+// Usage Example (in Express):
+// app.use('/api/admin-panel', authenticateJWT, (req, res) => {
+//   res.json({ message: 'Welcome, authorized admin!' });
+// });

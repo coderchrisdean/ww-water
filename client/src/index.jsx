@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ClerkProvider } from '@clerk/clerk-react';
 
 // Define custom theme with water-inspired colors
 const theme = extendTheme({
@@ -38,11 +39,16 @@ const theme = extendTheme({
   }
 });
 
+// TODO: Replace with your real Clerk publishable key from the Clerk dashboard
+const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme={theme}>
-      <App />
-    </ChakraProvider>
+    <ClerkProvider publishableKey={clerkPubKey}>
+      <ChakraProvider theme={theme}>
+        <App />
+      </ChakraProvider>
+    </ClerkProvider>
   </React.StrictMode>
 );

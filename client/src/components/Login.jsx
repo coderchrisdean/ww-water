@@ -3,28 +3,68 @@ import { Box, Button, FormControl, FormLabel, Input, VStack, Heading, Text, Cont
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
-function Login({ setCurrentPage, setIsLoggedIn }) {
+import { useLocation, useNavigate } from 'react-router-dom';
+
+function Login({ setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [accountCreatedMsg, setAccountCreatedMsg] = useState(false);
 
-  const handleLogin = () => {
-    if (username === 'demo' && password === 'password') {
-      setIsLoggedIn(true);
-      setCurrentPage('dashboard');
-      toast({
-        title: 'Login Successful',
-        description: "You've logged in successfully.",
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'top'
+  React.useEffect(() => {
+    if (location.state && location.state.accountCreated) {
+      setAccountCreatedMsg(true);
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
+
+  const handleLogin = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password })
       });
-    } else {
+      const data = await res.json();
+      if (res.ok && data.token) {
+        localStorage.setItem('token', data.token);
+        setIsLoggedIn(true);
+        // Decode JWT to check role
+        const [, payloadBase64] = data.token.split('.');
+        const payload = JSON.parse(atob(payloadBase64.replace(/-/g, '+').replace(/_/g, '/')));
+        if (payload.role === 'admin') {
+          const adminHost = process.env.REACT_APP_ADMIN_PANEL_HOST || 'http://localhost';
+          const adminPort = process.env.REACT_APP_ADMIN_PANEL_PORT || '3001';
+          const adminUrl = `${adminHost.replace(/\/$/, '')}:${adminPort}`;
+          window.location.href = adminUrl;
+        } else {
+          navigate('/dashboard');
+        }
+        toast({
+          title: 'Login Successful',
+          description: "You've logged in successfully.",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top'
+        });
+      } else {
+        toast({
+          title: 'Login Failed',
+          description: data.error || 'Invalid username or password.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
+    } catch (err) {
       toast({
         title: 'Login Failed',
-        description: 'Invalid username or password.',
+        description: 'Network error. Please try again.',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -32,6 +72,7 @@ function Login({ setCurrentPage, setIsLoggedIn }) {
       });
     }
   };
+
 
   // Animation variants
   const fadeInUp = {

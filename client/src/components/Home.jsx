@@ -3,7 +3,10 @@ import { Box, Button, Heading, Text, Container, VStack, Grid, GridItem, Card, Ca
 import { InfoIcon, SettingsIcon, StarIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
+import { useNavigate } from 'react-router-dom';
+
 function Home({ setCurrentPage, isLoggedIn }) {
+  const navigate = useNavigate();
   // Animation variants for fade-in effects
   const fadeIn = {
     hidden: { opacity: 0 },
@@ -53,7 +56,13 @@ function Home({ setCurrentPage, isLoggedIn }) {
             <Heading as="h1" size={{ base: '2xl', md: '4xl' }} color="white" mb={6} fontWeight="extrabold" fontFamily="heading">Unleash Your Water Adventure</Heading>
             <Text fontSize={{ base: 'lg', md: 'xl' }} color="white" mb={8} maxW="700px" mx="auto">Experience the thrill of jet skiing with top-quality rentals in Los Angeles. Book now for an unforgettable ride!</Text>
             <Button
-              onClick={() => setCurrentPage(isLoggedIn ? 'dashboard' : 'login')}
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate('/dashboard');
+                } else {
+                  navigate('/login');
+                }
+              }}
               bg="secondary.500"
               color="white"
               _hover={{ bg: 'secondary.600', transform: 'scale(1.05)' }}
@@ -83,7 +92,13 @@ function Home({ setCurrentPage, isLoggedIn }) {
           </motion.div>
           <motion.div variants={fadeInUp}>
             <Button
-              onClick={() => setCurrentPage(isLoggedIn ? 'dashboard' : 'login')}
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate('/dashboard');
+                } else {
+                  navigate('/login');
+                }
+              }}
               bg="primary.600"
               color="white"
               _hover={{ bg: 'primary.700' }}
@@ -155,7 +170,13 @@ function Home({ setCurrentPage, isLoggedIn }) {
             <Heading as="h2" size="2xl" mb={6} color="white" fontFamily="heading">Ready for the Ride of Your Life?</Heading>
             <Text fontSize="lg" mb={8} color="white" opacity={0.9}>Join us today and experience the thrill of jet skiing in Los Angeles.</Text>
             <Button
-              onClick={() => setCurrentPage(isLoggedIn ? 'dashboard' : 'signup')}
+              onClick={() => {
+                if (isLoggedIn) {
+                  navigate('/dashboard');
+                } else {
+                  navigate('/login');
+                }
+              }}
               bg="secondary.500"
               color="white"
               _hover={{ bg: 'secondary.600', transform: 'scale(1.05)' }}

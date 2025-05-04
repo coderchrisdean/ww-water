@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { Box, Flex, Text, IconButton, Button, Stack, Collapse, Icon, Link, Popover, PopoverTrigger, PopoverContent, useColorModeValue, useBreakpointValue, useDisclosure } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
-function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
+function Navbar({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
   const { isOpen, onToggle } = useDisclosure();
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setCurrentPage('home');
+    navigate('/');
   };
 
   return (
@@ -39,7 +41,7 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
             fontFamily="heading"
             fontSize={{ base: 'xl', md: '2xl' }}
             fontWeight="bold"
-            onClick={() => setCurrentPage('home')}
+            onClick={() => navigate('/')}
             cursor="pointer"
           >
             Wet N Wild Water Toys
@@ -58,20 +60,20 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
         </Flex>
 
         <Stack direction="row" spacing={4} display={{ base: 'none', md: 'flex' }} align="center">
-          <Button onClick={() => setCurrentPage('home')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Home</Button>
-          <Button onClick={() => setCurrentPage('about')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">About</Button>
-          <Button onClick={() => setCurrentPage('services')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Services</Button>
-          <Button onClick={() => setCurrentPage('faq')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">FAQ</Button>
-          <Button onClick={() => setCurrentPage('contact')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Contact</Button>
+          <Button onClick={() => navigate('/')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Home</Button>
+          <Button onClick={() => navigate('/about')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">About</Button>
+          <Button onClick={() => navigate('/services')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Services</Button>
+          <Button onClick={() => navigate('/faq')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">FAQ</Button>
+          <Button onClick={() => navigate('/contact')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Contact</Button>
           {isLoggedIn ? (
             <>
-              <Button onClick={() => setCurrentPage('dashboard')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Dashboard</Button>
+              <Button onClick={() => navigate('/dashboard')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Dashboard</Button>
               <Button onClick={handleLogout} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Logout</Button>
             </>
           ) : (
             <>
-              <Button onClick={() => setCurrentPage('login')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Login</Button>
-              <Button onClick={() => setCurrentPage('signup')} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" fontSize="md">Sign Up</Button>
+              <Button onClick={() => navigate('/login')} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} fontSize="md">Login</Button>
+              <Button onClick={() => navigate('/signup')} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" fontSize="md">Sign Up</Button>
             </>
           )}
         </Stack>
@@ -86,22 +88,17 @@ function Navbar({ setCurrentPage, isLoggedIn, setIsLoggedIn }) {
           borderStyle="solid"
           borderColor="primary.800"
         >
-          <Button onClick={() => { setCurrentPage('home'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Home</Button>
-          <Button onClick={() => { setCurrentPage('about'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">About</Button>
-          <Button onClick={() => { setCurrentPage('services'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Services</Button>
-          <Button onClick={() => { setCurrentPage('faq'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">FAQ</Button>
-          <Button onClick={() => { setCurrentPage('contact'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Contact</Button>
+          <Button onClick={() => { navigate('/'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Home</Button>
+          <Button onClick={() => { navigate('/about'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">About</Button>
+          <Button onClick={() => { navigate('/services'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Services</Button>
+          <Button onClick={() => { navigate('/faq'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">FAQ</Button>
+          <Button onClick={() => { navigate('/contact'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Contact</Button>
           {isLoggedIn ? (
             <>
-              <Button onClick={() => { setCurrentPage('dashboard'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Dashboard</Button>
+              <Button onClick={() => { navigate('/dashboard'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Dashboard</Button>
               <Button onClick={() => { handleLogout(); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Logout</Button>
             </>
-          ) : (
-            <>
-              <Button onClick={() => { setCurrentPage('login'); onToggle(); }} variant="ghost" color="white" _hover={{ bg: 'primary.600' }} justifyContent="flex-start">Login</Button>
-              <Button onClick={() => { setCurrentPage('signup'); onToggle(); }} variant="solid" bg="secondary.500" _hover={{ bg: 'secondary.600' }} color="white" justifyContent="flex-start">Sign Up</Button>
-            </>
-          )}
+          ) : null}
         </Stack>
       </Collapse>
     </Box>
